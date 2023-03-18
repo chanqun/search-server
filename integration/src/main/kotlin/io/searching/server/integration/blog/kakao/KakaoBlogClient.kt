@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestParam
 
-@FeignClient(name = "kakaoClient", url = "dapi.kakao.com")
-interface KakaoClient {
+@FeignClient(name = "kakaoBlogClient", url = "\${blog.kakaoUrl}")
+interface KakaoBlogClient {
 
     @GetMapping(value = ["/v2/search/blog"], produces = ["application/json;charset=utf-8"])
-    fun searchBlog(
+    fun search(
         @RequestParam("query") keyword: String,
         @RequestParam("sort") sortType: SortType,
         @RequestParam page: Int,
         @RequestParam size: Int = 10,
-        @RequestHeader("Authorization") authorization: String = "KakaoAK f312a5bc039eaf536a914d2c61747bbc"
+        @RequestHeader("Authorization") authorization: String
     ): String
 }

@@ -39,6 +39,7 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("io.github.microutils:kotlin-logging:1.12.5")
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
         runtimeOnly("com.h2database:h2")
 
