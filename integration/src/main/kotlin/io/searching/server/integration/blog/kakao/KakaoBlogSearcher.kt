@@ -5,7 +5,6 @@ import io.searching.server.integration.blog.BlogSearcher
 import io.searching.server.integration.blog.Documents
 import io.searching.server.integration.blog.SortType
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service

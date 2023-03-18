@@ -1,7 +1,7 @@
-package io.searching.server.api.blog
+package io.searching.server.api.blog.adapter.inp.web
 
 import io.searching.server.integration.blog.BlogSearcher
-import io.searching.server.integration.blog.SortType
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -13,7 +13,7 @@ class BlogApi(
 ) {
 
     @GetMapping
-    fun search() {
-        blogSearcher.search("hello", SortType.ACCURACY, 3)
+    fun search(@Valid req: BlogSearchReq) {
+        with(req) { blogSearcher.search(keyword, sort, page) }
     }
 }
