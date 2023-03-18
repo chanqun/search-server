@@ -88,9 +88,18 @@ project(":core") {
     tasks.getByName<BootJar>("bootJar") { enabled = false }
 }
 
+project(":integration") {
+    dependencies {
+    }
+
+    tasks.getByName<Jar>("jar") { enabled = true }
+    tasks.getByName<BootJar>("bootJar") { enabled = false }
+}
+
 project(":api") {
     dependencies {
         implementation(project(":core"))
+        implementation(project(":integration"))
     }
 
     tasks.withType<BootJar> {
@@ -100,12 +109,4 @@ project(":api") {
     tasks.register<Zip>("zip") {
         dependsOn("bootJar")
     }
-}
-
-project(":integration") {
-    dependencies {
-    }
-
-    tasks.getByName<Jar>("jar") { enabled = true }
-    tasks.getByName<BootJar>("bootJar") { enabled = false }
 }
