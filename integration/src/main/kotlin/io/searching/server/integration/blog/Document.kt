@@ -2,7 +2,7 @@ package io.searching.server.integration.blog
 
 import java.time.OffsetDateTime
 
-data class Documents(
+data class Document(
     val title: String,
     val contents: String,
     val url: String,

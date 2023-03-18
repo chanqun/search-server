@@ -1,5 +1,6 @@
 package io.searching.server.api.blog.adapter.inp.web
 
+import io.searching.server.integration.blog.Document
 import io.searching.server.integration.blog.SortType
 import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
@@ -13,4 +14,10 @@ class BlogSearchReq(
 
     @field:Min(1) @field:Max(50)
     val page: Int = 1
+)
+
+class BlogSearchRes(
+    val page: Int,
+    val isEnd: Boolean,
+    val documents: List<Document>
 )
