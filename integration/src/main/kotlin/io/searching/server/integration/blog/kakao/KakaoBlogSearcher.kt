@@ -5,6 +5,7 @@ import io.searching.server.integration.blog.BlogSearcher
 import io.searching.server.integration.blog.Documents
 import io.searching.server.integration.blog.SortType
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -12,12 +13,12 @@ class KakaoBlogSearcher(
     private val kakaoBlogClient: KakaoBlogClient,
     private val blogProperties: BlogProperties
 ) : BlogSearcher {
-    override fun search(keyword: String, sort: SortType, page: Int): Page<Documents> {
-        val value =
+    override fun search(keyword: String, sort: SortType?, page: Int?): Page<Documents> {
+        val kakaoBlogSearchRes =
             kakaoBlogClient.search(keyword, sort, page, authorization = "KakaoAK ${blogProperties.kakaoRestApiKey}")
 
-        println(value)
+        println(kakaoBlogSearchRes)
 
-        return Page.empty()
+        return kakaoBlogSearchRes.toPage()
     }
 }

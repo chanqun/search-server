@@ -11,5 +11,5 @@ interface BlogSearcher {
      * sort : ACCURACY, RECENCY 지원
      * page : pagination 형태로 제공
      */
-    fun search(keyword: String, sort: SortType, page: Int): Page<Documents>
+    fun search(keyword: String, sort: SortType?, page: Int?): Page<Documents>
 }

@@ -12,9 +12,9 @@ interface KakaoBlogClient {
     @GetMapping(value = ["/v2/search/blog"], produces = ["application/json;charset=utf-8"])
     fun search(
         @RequestParam("query") keyword: String,
-        @RequestParam("sort") sortType: SortType,
-        @RequestParam page: Int,
+        @RequestParam("sort") sortType: SortType?,
+        @RequestParam page: Int?,
         @RequestParam size: Int = 10,
         @RequestHeader("Authorization") authorization: String
-    ): String
+    ): KakaoBlogSearchRes
 }
