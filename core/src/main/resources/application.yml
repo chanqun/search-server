@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test
+    username: ${db.username:sa}
+    password: ${db.password:1234}
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+  jpa:
+    hibernate:
+      ddl-auto: ${db.ddl:create-drop}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+      jakarta:
+        persistence:
+          validation:
+            mode: none
+    show-sql: false
