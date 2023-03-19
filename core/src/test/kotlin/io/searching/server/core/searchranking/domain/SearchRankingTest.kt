@@ -15,7 +15,7 @@ internal class SearchRankingTest {
     }
 
     @Test
-    fun `검색하면 검색된 횟수가 올라간다`() {
+    fun `검색하면 검색 횟수가 올라간다`() {
         val searchRanking = createSearchRanking(count = 1)
 
         searchRanking.search()

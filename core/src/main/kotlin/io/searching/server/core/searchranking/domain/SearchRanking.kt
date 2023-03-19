@@ -22,14 +22,16 @@ class SearchRanking(
     @Column(length = 100, nullable = false)
     val keyword: String,
 
-    /** 검색된 횟수 */
+    /** 검색 횟수 */
     var count: Int = 0,
 
     /** 생성일시 */
     val createdAt: OffsetDateTime = OffsetDateTime.now()
 
 ) : BaseAggregateRoot<SearchRanking>() {
-    fun search() {
+    fun search(): SearchRanking {
         this.count++
+
+        return this
     }
 }
