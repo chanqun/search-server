@@ -42,6 +42,7 @@ subprojects {
 
         runtimeOnly("com.h2database:h2")
 
+        testImplementation("com.ninja-squad:springmockk:3.1.1")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 
