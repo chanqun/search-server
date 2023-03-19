@@ -1,6 +1,6 @@
-package io.sharing.server.core.searchranking.domain
+package io.searching.server.core.searchranking.domain
 
-import io.sharing.server.core.support.jpa.BaseAggregateRoot
+import io.searching.server.core.support.jpa.BaseAggregateRoot
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table

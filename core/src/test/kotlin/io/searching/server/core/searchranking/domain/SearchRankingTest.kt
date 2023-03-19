@@ -1,4 +1,4 @@
-package io.sharing.server.core.searchranking.domain
+package io.searching.server.core.searchranking.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

@@ -1,4 +1,4 @@
-package io.sharing.server.core.support.jpa
+package io.searching.server.core.support.jpa
 
 import jakarta.persistence.MappedSuperclass
 import org.springframework.data.domain.AfterDomainEventPublication
