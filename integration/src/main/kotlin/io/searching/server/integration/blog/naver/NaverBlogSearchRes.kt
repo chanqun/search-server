@@ -1,7 +1,9 @@
 package io.searching.server.integration.blog.naver
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import io.searching.server.integration.blog.Document
-import java.time.OffsetDateTime
+import java.time.LocalDate
+import java.time.OffsetTime
 
 class NaverBlogSearchRes(
     val start: Int,
@@ -18,12 +20,14 @@ class NaverBlogDocument(
     val description: String,
     val link: String,
     val bloggername: String,
-    val postdate: OffsetDateTime
+
+    @JsonFormat(pattern = "yyyyMMdd")
+    val postdate: LocalDate
 ) {
     fun toDocument(): Document {
         return Document(
             title = title, contents = description, url = link,
-            blogName = bloggername, thumbnail = "noThumbNail", datetime = postdate,
+            blogName = bloggername, thumbnail = "", datetime = postdate.atTime(OffsetTime.MIN),
         )
     }
 }

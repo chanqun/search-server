@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger { }
 
-@Order(2)
+@Order(1)
 @Component
 class NaverBlogSearcher(
     private val naverBlogClient: NaverBlogClient,
