@@ -1,3 +1,6 @@
 blog:
   kakaoUrl: https://dapi.kakao.com
   kakaoRestApiKey: f312a5bc039eaf536a914d2c61747bbc
+  naverUrl: https://openapi.naver.com
+  naverClientId: QXOb6EbGZazNPt1LH7MI
+  naverClientSecret: nd00gvHdvq
