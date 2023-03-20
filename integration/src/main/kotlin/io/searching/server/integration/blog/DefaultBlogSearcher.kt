@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component
 class DefaultBlogSearcher(
     private val vendors: List<BlogSearchVendor>
 ) : BlogSearcher {
-    override fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>> {
-        val res: Triple<Int, Boolean, List<Document>>? = vendors.firstNotNullOfOrNull {
+    override fun search(keyword: String, sortType: SortType, page: Int): BlogSearcherDto {
+        val blogSearcherDto: BlogSearcherDto? = vendors.firstNotNullOfOrNull {
             it.search(keyword, sortType, page)
         }
 
-        return res ?: throw CustomSearchingException(SEARCHING_SERVICE_ERROR)
+        return blogSearcherDto ?: throw CustomSearchingException(SEARCHING_SERVICE_ERROR)
     }
 
     companion object {

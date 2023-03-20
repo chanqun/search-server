@@ -4,6 +4,7 @@ import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.verify
 import io.searching.server.integration.blog.BlogSearcher
+import io.searching.server.integration.blog.BlogSearcherDto
 import io.searching.server.integration.blog.Document
 import io.searching.server.integration.blog.SortType
 import org.assertj.core.api.Assertions.assertThat
@@ -30,7 +31,7 @@ internal class BlogAppServiceTest @Autowired constructor(
 
     @Test
     fun `블로그 검색시 블로그 검색 이벤트 발생`() {
-        every { blogSearcher.search("keyword", any(), any()) } returns Triple(
+        every { blogSearcher.search("keyword", any(), any()) } returns BlogSearcherDto(
             0, true, listOf(
                 Document(
                     title = "title", contents = "contents", url = "url", blogName = "blogName", thumbnail = "thumbnail",

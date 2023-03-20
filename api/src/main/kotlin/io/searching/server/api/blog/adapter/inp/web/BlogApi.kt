@@ -20,8 +20,8 @@ class BlogApi(
     fun search(@Valid req: BlogSearchReq): ResponseEntity<BlogSearchRes> {
         logger.info { "[GET] /blogs, $req" }
 
-        val (page, isEnd, documents) = with(req) { blogAppService.search(keyword, sort, page) }
+        val blogSearcherDto = with(req) { blogAppService.search(keyword, sort, page) }
 
-        return ResponseEntity.ok(BlogSearchRes.of(page, isEnd, documents))
+        return ResponseEntity.ok(BlogSearchRes.of(blogSearcherDto))
     }
 }

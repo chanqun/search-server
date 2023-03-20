@@ -1,6 +1,6 @@
 package io.searching.server.api.blog.adapter.inp.web
 
-import io.searching.server.integration.blog.Document
+import io.searching.server.integration.blog.BlogSearcherDto
 import io.searching.server.integration.blog.SortType
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.validator.constraints.Range
@@ -22,13 +22,15 @@ class BlogSearchRes(
     val documents: List<BlogDocumentData>
 ) {
     companion object {
-        fun of(page: Int, isEnd: Boolean, documents: List<Document>): BlogSearchRes {
-            return BlogSearchRes(page, isEnd, documents.map {
-                BlogDocumentData(
-                    title = it.title, contents = it.contents, url = it.url,
-                    blogName = it.blogName, thumbnail = it.thumbnail, datetime = it.datetime
-                )
-            })
+        fun of(blogSearcherDto: BlogSearcherDto): BlogSearchRes {
+            return with(blogSearcherDto) {
+                BlogSearchRes(page, isEnd, documents.map {
+                    BlogDocumentData(
+                        title = it.title, contents = it.contents, url = it.url,
+                        blogName = it.blogName, thumbnail = it.thumbnail, datetime = it.datetime
+                    )
+                })
+            }
         }
     }
 }

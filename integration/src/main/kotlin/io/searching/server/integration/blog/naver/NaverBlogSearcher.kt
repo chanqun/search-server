@@ -16,7 +16,7 @@ class NaverBlogSearcher(
     private val blogProperties: BlogProperties,
     private val eventPublisher: ApplicationEventPublisher
 ) : BlogSearchVendor {
-    override fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>>? {
+    override fun search(keyword: String, sortType: SortType, page: Int): BlogSearcherDto? {
         return try {
             val res: NaverBlogSearchRes =
                 naverBlogClient.search(
@@ -25,7 +25,7 @@ class NaverBlogSearcher(
                     clientId = blogProperties.naverClientId, clientSecret = blogProperties.naverClientSecret
                 )
 
-            Triple(page, res.isEnd, res.items.map { it.toDocument() })
+            BlogSearcherDto(page, res.isEnd, res.items.map { it.toDocument() })
         } catch (e: Exception) {
             logger.error(e) { "NaverBlogSearcher ${e.message}" }
 

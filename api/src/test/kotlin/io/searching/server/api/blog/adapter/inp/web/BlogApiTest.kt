@@ -4,6 +4,7 @@ import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.verify
 import io.searching.server.integration.blog.BlogSearcher
+import io.searching.server.integration.blog.BlogSearcherDto
 import io.searching.server.integration.blog.Document
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,7 +30,7 @@ internal class BlogApiTest {
 
     @Test
     fun `blog 키워드 조회`() {
-        every { blogSearcher.search("keyword", any(), any()) } returns Triple(
+        every { blogSearcher.search("keyword", any(), any()) } returns BlogSearcherDto(
             0, true, listOf(
                 Document(
                     title = "title", contents = "contents", url = "url", blogName = "blogName", thumbnail = "thumbnail",

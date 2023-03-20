@@ -16,7 +16,7 @@ class KakaoBlogSearcher(
     private val blogProperties: BlogProperties,
     private val eventPublisher: ApplicationEventPublisher
 ) : BlogSearchVendor {
-    override fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>>? {
+    override fun search(keyword: String, sortType: SortType, page: Int): BlogSearcherDto? {
         return try {
             val res: KakaoBlogSearchRes =
                 kakaoBlogClient.search(
@@ -24,7 +24,7 @@ class KakaoBlogSearcher(
                     size = PAGE_DISPLAY_CONTENTS_COUNT, authorization = "KakaoAK ${blogProperties.kakaoRestApiKey}"
                 )
 
-            Triple(page, res.meta.is_end, res.documents.map { it.toDocument() })
+            BlogSearcherDto(page, res.meta.is_end, res.documents.map { it.toDocument() })
         } catch (e: Exception) {
             logger.error(e) { "KakaoBlogSearcher ${e.message}" }
 
