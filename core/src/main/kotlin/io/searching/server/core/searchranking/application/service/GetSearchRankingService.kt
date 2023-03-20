@@ -1,6 +1,6 @@
 package io.searching.server.core.searchranking.application.service
 
-import io.searching.server.core.searchranking.application.port.inp.GetSearchRanking
+import io.searching.server.core.searchranking.application.port.inp.GetTopTenSearchRanking
 import io.searching.server.core.searchranking.application.port.outp.SearchRankingRepository
 import io.searching.server.core.searchranking.domain.SearchRanking
 import org.springframework.data.domain.Pageable
@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class GetSearchRankingService(
     private val searchRankingRepository: SearchRankingRepository
-) : GetSearchRanking {
-    override fun getTopTen(): List<SearchRanking> {
+) : GetTopTenSearchRanking {
+    override fun get(): List<SearchRanking> {
         return searchRankingRepository.findTopRankingByCount(Pageable.ofSize(MAX_RANKING_REQUEST))
     }
 

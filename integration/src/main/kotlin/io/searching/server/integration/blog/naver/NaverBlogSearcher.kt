@@ -1,7 +1,7 @@
 package io.searching.server.integration.blog.naver
 
 import io.searching.server.integration.blog.*
-import io.searching.server.integration.blog.BlogSearcher.Companion.PAGE_DISPLAY_CONTENTS_COUNT
+import io.searching.server.integration.blog.DefaultBlogSearcher.Companion.PAGE_DISPLAY_CONTENTS_COUNT
 import mu.KotlinLogging
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
@@ -18,9 +18,9 @@ class NaverBlogSearcher(
         return try {
             val res: NaverBlogSearchRes =
                 naverBlogClient.search(
-                    keyword, convertSortTypeToString(sortType), calcContentStart(page),
-                    clientId = blogProperties.naverClientId,
-                    clientSecret = blogProperties.naverClientSecret
+                    keyword = keyword, sort = convertSortTypeToString(sortType),
+                    start = calcItemsStart(page), size = PAGE_DISPLAY_CONTENTS_COUNT,
+                    clientId = blogProperties.naverClientId, clientSecret = blogProperties.naverClientSecret
                 )
 
             Triple(page, res.isEnd, res.items.map { it.toDocument() })
@@ -31,7 +31,7 @@ class NaverBlogSearcher(
         }
     }
 
-    private fun calcContentStart(page: Int) = (page * PAGE_DISPLAY_CONTENTS_COUNT) + 1
+    private fun calcItemsStart(page: Int) = (page * PAGE_DISPLAY_CONTENTS_COUNT) + 1
 
     private fun convertSortTypeToString(sortType: SortType): String {
         return when (sortType) {

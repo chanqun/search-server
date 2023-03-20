@@ -13,4 +13,8 @@ class DefaultBlogSearcher(
 
         return res ?: throw IllegalArgumentException()
     }
+
+    companion object {
+        const val PAGE_DISPLAY_CONTENTS_COUNT = 10
+    }
 }

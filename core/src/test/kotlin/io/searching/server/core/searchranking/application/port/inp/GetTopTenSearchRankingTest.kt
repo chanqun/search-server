@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @Transactional
-internal class GetSearchRankingTest @Autowired constructor(
+internal class GetTopTenSearchRankingTest @Autowired constructor(
     private val searchRankingRepository: SearchRankingRepository,
-    private val getSearchRanking: GetSearchRanking
+    private val getTopTenSearchRanking: GetTopTenSearchRanking
 ) {
 
     @Test
@@ -21,7 +21,7 @@ internal class GetSearchRankingTest @Autowired constructor(
             searchRankingRepository.save(createSearchRanking("keyword$it"))
         }
 
-        val searchRankings = getSearchRanking.getTopTen()
+        val searchRankings = getTopTenSearchRanking.get()
 
         assertThat(searchRankings).hasSize(10)
     }

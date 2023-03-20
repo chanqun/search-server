@@ -1,6 +1,5 @@
 package io.searching.server.integration.blog.naver
 
-import io.searching.server.integration.blog.BlogSearcher.Companion.PAGE_DISPLAY_CONTENTS_COUNT
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestHeader
@@ -14,7 +13,7 @@ interface NaverBlogClient {
         @RequestParam("query") keyword: String,
         @RequestParam("sort") sort: String?,
         @RequestParam("start") start: Int?,
-        @RequestParam("display") size: Int = PAGE_DISPLAY_CONTENTS_COUNT,
+        @RequestParam("display") size: Int,
         @RequestHeader("X-Naver-Client-Id") clientId: String,
         @RequestHeader("X-Naver-Client-Secret") clientSecret: String
     ): NaverBlogSearchRes
