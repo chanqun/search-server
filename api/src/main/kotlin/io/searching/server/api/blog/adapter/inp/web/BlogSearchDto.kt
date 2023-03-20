@@ -2,9 +2,8 @@ package io.searching.server.api.blog.adapter.inp.web
 
 import io.searching.server.integration.blog.Document
 import io.searching.server.integration.blog.SortType
-import jakarta.validation.constraints.Max
-import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
+import org.hibernate.validator.constraints.Range
 import java.time.OffsetDateTime
 
 class BlogSearchReq(
@@ -13,7 +12,7 @@ class BlogSearchReq(
 
     val sort: SortType = SortType.ACCURACY,
 
-    @field:Min(1) @field:Max(50)
+    @field:Range(min = 1, max = 50)
     val page: Int = 1
 )
 
