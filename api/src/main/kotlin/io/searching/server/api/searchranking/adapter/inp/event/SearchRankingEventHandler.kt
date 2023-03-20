@@ -21,10 +21,10 @@ class SearchRankingEventHandler(
     @TransactionalEventListener(BlogSearchedEvent::class)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     fun onBlogSearchedEvent(event: BlogSearchedEvent) {
-        while (true) {
+        repeat(10) {
             try {
                 recordSearchRanking.record(RecordSearchRankingCommand(event.keyword))
-                break
+                return
             } catch (e: Exception) {
                 logger.error(e) { "검색 기록 실패" }
 
