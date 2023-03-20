@@ -5,6 +5,7 @@ import io.searching.server.integration.blog.SortType
 import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
+import java.time.OffsetDateTime
 
 class BlogSearchReq(
     @field:NotBlank
@@ -19,5 +20,25 @@ class BlogSearchReq(
 class BlogSearchRes(
     val page: Int,
     val isEnd: Boolean,
-    val documents: List<Document>
+    val documents: List<BlogDocumentData>
+) {
+    companion object {
+        fun of(page: Int, isEnd: Boolean, documents: List<Document>): BlogSearchRes {
+            return BlogSearchRes(page, isEnd, documents.map {
+                BlogDocumentData(
+                    title = it.title, contents = it.contents, url = it.url,
+                    blogName = it.blogName, thumbnail = it.thumbnail, datetime = it.datetime
+                )
+            })
+        }
+    }
+}
+
+class BlogDocumentData(
+    val title: String,
+    val contents: String,
+    val url: String,
+    val blogName: String,
+    val thumbnail: String,
+    val datetime: OffsetDateTime
 )

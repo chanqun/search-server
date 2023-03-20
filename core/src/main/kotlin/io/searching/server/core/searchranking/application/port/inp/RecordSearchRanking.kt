@@ -11,6 +11,6 @@ interface RecordSearchRanking {
     fun record(command: RecordSearchRankingCommand): SearchRanking
 }
 
-data class RecordSearchRankingCommand(
+class RecordSearchRankingCommand(
     val keyword: String
 )

@@ -21,6 +21,6 @@ class BlogApi(
 
         eventPublisher.publishEvent(BlogSearchedEvent(req.keyword))
 
-        return ResponseEntity.ok(BlogSearchRes(page, isEnd, documents))
+        return ResponseEntity.ok(BlogSearchRes.of(page, isEnd, documents))
     }
 }
