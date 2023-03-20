@@ -8,5 +8,5 @@
 - com.ninja-squad:springmockk > mockk 테스트를 모듈
 
 ## 추가 작업
-relaxedQueryChars 고려해야함
-sort typemismatch error 추가 수정 필요
+- Triple dto로 만들기
+- redis 적용하기
