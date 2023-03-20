@@ -7,12 +7,15 @@ class SearchRankingRes(
 ) {
     companion object {
         fun of(searchRankings: List<SearchRanking>): SearchRankingRes {
-            return SearchRankingRes(searchRankings.map { SearchRankingData(it.keyword, it.count) })
+            return SearchRankingRes(searchRankings.mapIndexed { index, searchRanking ->
+                SearchRankingData(ranking = index + 1, keyword = searchRanking.keyword, count = searchRanking.count)
+            })
         }
     }
 }
 
 class SearchRankingData(
+    val ranking: Int,
     val keyword: String,
     val count: Int
 )

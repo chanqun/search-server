@@ -5,17 +5,19 @@ import io.searching.server.integration.blog.Document
 import io.searching.server.integration.blog.SortType
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 interface BlogAppService {
 
     /**
      * 검색 후
-     * 검색 완료 이벤트를 발생
+     * 검색 완료 이벤트 발생
      */
     fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>>
 }
 
 @Service
+@Transactional
 class DefaultBlogAppService(
     private val blogSearcher: BlogSearcher,
     private val eventPublisher: ApplicationEventPublisher

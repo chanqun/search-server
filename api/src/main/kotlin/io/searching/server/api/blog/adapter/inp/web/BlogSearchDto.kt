@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank
 import org.hibernate.validator.constraints.Range
 import java.time.OffsetDateTime
 
-class BlogSearchReq(
+data class BlogSearchReq(
     @field:NotBlank
     val keyword: String,
 

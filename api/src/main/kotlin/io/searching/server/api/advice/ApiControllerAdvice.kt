@@ -2,26 +2,29 @@ package io.searching.server.api.advice
 
 import io.searching.server.core.support.exception.CustomSearchingException
 import mu.KotlinLogging
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 private val logger = KotlinLogging.logger {}
 
 @RestControllerAdvice
-class ApiControllerAdvice {
+class ApiControllerAdvice(
+    private val eventPublisher: ApplicationEventPublisher
+) {
     @ExceptionHandler(Exception::class)
     fun exception(e: Exception): ResponseEntity<ErrorRes> {
         logger.error(e) { e.message }
+
+        eventPublisher.publishEvent(UnhandledExceptionEvent(e))
 
         return ResponseEntity.internalServerError().body(ErrorRes(UNKNOWN_ERROR_MESSAGE))
     }
 
     @ExceptionHandler(CustomSearchingException::class)
-    @ResponseBody
     fun customSearchingException(e: CustomSearchingException): ResponseEntity<ErrorRes> {
         logger.error(e) { "CustomSearchingException: ${e.error}" }
 
@@ -57,6 +60,8 @@ class ApiControllerAdvice {
         const val UNKNOWN_ERROR_MESSAGE = "서버에 문제가 발생 했습니다. 잠시 후 다시 시도해주세요"
     }
 }
+
+class UnhandledExceptionEvent(e: Exception)
 
 class ErrorRes(
     var errors: Any

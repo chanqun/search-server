@@ -1,10 +1,7 @@
 package io.searching.server.core.searchranking.domain
 
 import io.searching.server.core.support.jpa.BaseAggregateRoot
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
-import jakarta.persistence.UniqueConstraint
+import jakarta.persistence.*
 import java.time.OffsetDateTime
 
 /**
@@ -26,10 +23,13 @@ class SearchRanking(
     var count: Int = 0,
 
     /** 생성일시 */
-    val createdAt: OffsetDateTime = OffsetDateTime.now()
+    val createdAt: OffsetDateTime = OffsetDateTime.now(),
+
+    @Version
+    val version: Long = 0
 
 ) : BaseAggregateRoot<SearchRanking>() {
-    fun search(): SearchRanking {
+    fun record(): SearchRanking {
         this.count++
 
         return this

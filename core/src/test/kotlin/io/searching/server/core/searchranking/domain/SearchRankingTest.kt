@@ -18,7 +18,7 @@ internal class SearchRankingTest {
     fun `검색하면 검색 횟수가 올라간다`() {
         val searchRanking = createSearchRanking(count = 1)
 
-        searchRanking.search()
+        searchRanking.record()
 
         assertThat(searchRanking.count).isEqualTo(2)
     }
