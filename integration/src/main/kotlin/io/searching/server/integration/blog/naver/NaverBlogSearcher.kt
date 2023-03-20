@@ -3,6 +3,7 @@ package io.searching.server.integration.blog.naver
 import io.searching.server.integration.blog.*
 import io.searching.server.integration.blog.DefaultBlogSearcher.Companion.PAGE_DISPLAY_CONTENTS_COUNT
 import mu.KotlinLogging
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
@@ -12,7 +13,8 @@ private val logger = KotlinLogging.logger { }
 @Component
 class NaverBlogSearcher(
     private val naverBlogClient: NaverBlogClient,
-    private val blogProperties: BlogProperties
+    private val blogProperties: BlogProperties,
+    private val eventPublisher: ApplicationEventPublisher
 ) : BlogSearchVendor {
     override fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>>? {
         return try {
@@ -25,7 +27,9 @@ class NaverBlogSearcher(
 
             Triple(page, res.isEnd, res.items.map { it.toDocument() })
         } catch (e: Exception) {
-            logger.error { "NaverBlogSearcher ${e.message}" }
+            logger.error(e) { "NaverBlogSearcher ${e.message}" }
+
+            eventPublisher.publishEvent(BlogSearchingFailedEvent())
 
             null
         }

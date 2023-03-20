@@ -92,6 +92,7 @@ project(":core") {
 
 project(":integration") {
     dependencies {
+        implementation(project(":core"))
     }
 
     tasks.getByName<Jar>("jar") { enabled = true }

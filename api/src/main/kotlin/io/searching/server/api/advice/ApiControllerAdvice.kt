@@ -1,10 +1,12 @@
 package io.searching.server.api.advice
 
+import io.searching.server.core.support.exception.CustomSearchingException
 import mu.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 private val logger = KotlinLogging.logger {}
@@ -13,21 +15,29 @@ private val logger = KotlinLogging.logger {}
 class ApiControllerAdvice {
     @ExceptionHandler(Exception::class)
     fun exception(e: Exception): ResponseEntity<ErrorRes> {
-        logger.error { e.message }
+        logger.error(e) { e.message }
 
         return ResponseEntity.internalServerError().body(ErrorRes(UNKNOWN_ERROR_MESSAGE))
     }
 
+    @ExceptionHandler(CustomSearchingException::class)
+    @ResponseBody
+    fun customSearchingException(e: CustomSearchingException): ResponseEntity<ErrorRes> {
+        logger.error(e) { "CustomSearchingException: ${e.error}" }
+
+        return ResponseEntity.internalServerError().body(ErrorRes(e.error))
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun methodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorRes> {
-        logger.info { "MethodArgumentNotValidException > ${e.message}" }
+        logger.trace(e) { "MethodArgumentNotValidException > ${e.message}" }
 
         return ResponseEntity.badRequest().body(ErrorRes(DEFAULT_REQUEST_ERROR_MESSAGE))
     }
 
     @ExceptionHandler(BindException::class)
     fun bindException(e: BindException): ResponseEntity<ErrorRes> {
-        logger.info { "BindException > ${e.message}" }
+        logger.trace(e) { "BindException > ${e.message}" }
 
         val fieldErrors = e.bindingResult.fieldErrors
 

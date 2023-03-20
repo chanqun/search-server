@@ -1,5 +1,7 @@
 package io.searching.server.integration.blog
 
+import io.searching.server.core.support.exception.CustomSearchingException
+import io.searching.server.core.support.exception.SearchingError.*
 import org.springframework.stereotype.Component
 
 @Component
@@ -11,7 +13,7 @@ class DefaultBlogSearcher(
             it.search(keyword, sortType, page)
         }
 
-        return res ?: throw IllegalArgumentException()
+        return res ?: throw CustomSearchingException(SEARCHING_SERVICE_ERROR)
     }
 
     companion object {
