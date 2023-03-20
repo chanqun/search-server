@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 class DefaultBlogSearcher(
     private val vendors: List<BlogSearchVendor>
 ) : BlogSearcher {
-    override fun search(keyword: String, sortType: SortType?, page: Int): Triple<Int, Boolean, List<Document>> {
+    override fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>> {
         val res: Triple<Int, Boolean, List<Document>>? = vendors.firstNotNullOfOrNull {
             it.search(keyword, sortType, page)
         }

@@ -13,7 +13,7 @@ class KakaoBlogSearcher(
     private val kakaoBlogClient: KakaoBlogClient,
     private val blogProperties: BlogProperties
 ) : BlogSearchVendor {
-    override fun search(keyword: String, sortType: SortType?, page: Int): Triple<Int, Boolean, List<Document>>? {
+    override fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>>? {
         return try {
             val res: KakaoBlogSearchRes =
                 kakaoBlogClient.search(keyword, sortType, page, authorization = "KakaoAK ${blogProperties.kakaoRestApiKey}")

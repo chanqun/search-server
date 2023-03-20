@@ -14,11 +14,11 @@ class NaverBlogSearcher(
     private val naverBlogClient: NaverBlogClient,
     private val blogProperties: BlogProperties
 ) : BlogSearchVendor {
-    override fun search(keyword: String, sortType: SortType?, page: Int): Triple<Int, Boolean, List<Document>>? {
+    override fun search(keyword: String, sortType: SortType, page: Int): Triple<Int, Boolean, List<Document>>? {
         return try {
             val res: NaverBlogSearchRes =
                 naverBlogClient.search(
-                    keyword, sortType?.let { convertSortTypeToString(it) }, calcContentStart(page),
+                    keyword, convertSortTypeToString(sortType), calcContentStart(page),
                     clientId = blogProperties.naverClientId,
                     clientSecret = blogProperties.naverClientSecret
                 )

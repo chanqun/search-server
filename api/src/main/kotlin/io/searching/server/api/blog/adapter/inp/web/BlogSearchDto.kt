@@ -11,7 +11,7 @@ class BlogSearchReq(
     @field:NotBlank
     val keyword: String,
 
-    val sort: SortType? = null,
+    val sort: SortType = SortType.ACCURACY,
 
     @field:Min(1) @field:Max(50)
     val page: Int = 1
