@@ -19,17 +19,17 @@ internal class RecordSearchRankingTest @Autowired constructor(
     fun `첫 검색어인 경우 검색어 랭킹 등록 후 검색 횟수를 올린다`() {
         assertThat(searchRankingRepository.findAll()).isEmpty()
 
-        val searchRanking = recordSearchRanking.record(RecordSearchRankingCommand("검색어"))
+        val searchRanking = recordSearchRanking.record(RecordSearchRankingCommand("검색어", 1))
 
         assertThat(searchRanking.count).isEqualTo(1)
         assertThat(searchRankingRepository.findAll()).hasSize(1)
     }
 
     @Test
-    fun `이미 등록된 검색어인 경우 조회 후 검색 횟수를 올린다`() {
+    fun `이미 등록된 검색어인 경우 조회 후 검색 횟수를 변경한다`() {
         searchRankingRepository.save(createSearchRanking("검색어", count = 10))
 
-        val searchRanking = recordSearchRanking.record(RecordSearchRankingCommand("검색어"))
+        val searchRanking = recordSearchRanking.record(RecordSearchRankingCommand("검색어", 11))
 
         assertThat(searchRanking.count).isEqualTo(11)
         assertThat(searchRankingRepository.findAll()).hasSize(1)

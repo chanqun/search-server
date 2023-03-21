@@ -14,6 +14,8 @@ interface KeywordCounter {
     fun get(keyword: String): Int
 
     fun getTopTen(): List<Pair<String, Int>>
+
+    fun getAll(): List<Pair<String, Int>>
 }
 
 @Component
@@ -45,6 +47,10 @@ class InMemoryKeywordCounter(
 
         return counter.entries.sortedByDescending { it.value.get() }
             .subList(0, size).map { Pair(it.key, it.value.get()) }
+    }
+
+    override fun getAll(): List<Pair<String, Int>> {
+        return counter.entries.map { Pair(it.key, it.value.get()) }
     }
 
     companion object {

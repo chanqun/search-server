@@ -16,6 +16,6 @@ class SearchRankingService(
         val searchRanking = searchRankingRepository.findByKeyword(command.keyword)
             ?: let { searchRankingRepository.save(SearchRanking(command.keyword)) }
 
-        return searchRanking.record()
+        return searchRanking.record(command.count)
     }
 }

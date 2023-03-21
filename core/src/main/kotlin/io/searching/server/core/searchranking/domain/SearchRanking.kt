@@ -29,8 +29,10 @@ class SearchRanking(
     val version: Long = 0
 
 ) : BaseAggregateRoot<SearchRanking>() {
-    fun record(): SearchRanking {
-        this.count++
+    fun record(count: Int): SearchRanking {
+        require(count >= 0)
+
+        this.count = count
 
         return this
     }

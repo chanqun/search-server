@@ -12,5 +12,6 @@ interface RecordSearchRanking {
 }
 
 class RecordSearchRankingCommand(
-    val keyword: String
+    val keyword: String,
+    val count: Int
 )
