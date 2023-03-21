@@ -61,8 +61,8 @@ class ApiControllerAdvice(
     }
 
     companion object {
-        const val DEFAULT_REQUEST_ERROR_MESSAGE = "요청 값을 확인해주세요"
-        const val UNKNOWN_ERROR_MESSAGE = "서버에 문제가 발생 했습니다. 잠시 후 다시 시도해주세요"
+        private const val DEFAULT_REQUEST_ERROR_MESSAGE = "요청 값을 확인해주세요"
+        private const val UNKNOWN_ERROR_MESSAGE = "서버에 문제가 발생 했습니다. 잠시 후 다시 시도해주세요"
     }
 }
 
