@@ -21,6 +21,8 @@ internal class SearchRankingApiTest @Autowired constructor(
 
     @Test
     fun `검색어 랭킹 조회`() {
+        keywordCounter.initialize()
+
         (1..2).forEach {
             keywordCounter.increase("keyword$it", it)
         }

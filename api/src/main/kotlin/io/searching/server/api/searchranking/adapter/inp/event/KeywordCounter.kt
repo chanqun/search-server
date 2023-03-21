@@ -7,6 +7,8 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 
 interface KeywordCounter {
+    fun initialize()
+
     fun increase(keyword: String, count: Int = 1): Int
 
     fun get(keyword: String): Int
@@ -19,7 +21,9 @@ class InMemoryKeywordCounter(
     private val searchRankingRepository: SearchRankingRepository
 ) : KeywordCounter {
     @PostConstruct
-    fun initialize() {
+    override fun initialize() {
+        counter.clear()
+
         searchRankingRepository.findAll().forEach {
             this.increase(it.keyword, it.count)
         }
