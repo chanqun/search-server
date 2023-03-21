@@ -48,7 +48,7 @@ searchRankings
 
 | Name | Type | Description |
 | --- | --- | --- |
-| ranking | Integer | 등수 |
+| ranking | Integer | 순위 |
 | keyword | String | 검색 키워드 |
 | count | Integer | 검색된 횟수 |
 
