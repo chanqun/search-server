@@ -20,7 +20,3 @@ spring:
           validation:
             mode: none
     show-sql: false
-
-server:
-  tomcat:
-    relaxed-query-chars: <,>,[,\,],^,`,{,|,}

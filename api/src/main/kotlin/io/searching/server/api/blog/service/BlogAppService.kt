@@ -2,7 +2,6 @@ package io.searching.server.api.blog.service
 
 import io.searching.server.integration.blog.BlogSearcher
 import io.searching.server.integration.blog.BlogSearcherDto
-import io.searching.server.integration.blog.SortType
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -10,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional
 interface BlogAppService {
 
     /**
-     * 검색 후
-     * 검색 완료 이벤트 발생
+     * 블로그 검색
+     * @event BlogSearchedEvent
      */
-    fun search(keyword: String, sortType: SortType, page: Int): BlogSearcherDto
+    fun search(spec: BlogSearchSpec): BlogSearcherDto
 }
 
 @Service
@@ -22,9 +21,9 @@ class DefaultBlogAppService(
     private val blogSearcher: BlogSearcher,
     private val eventPublisher: ApplicationEventPublisher
 ) : BlogAppService {
-    override fun search(keyword: String, sortType: SortType, page: Int): BlogSearcherDto {
-        return blogSearcher.search(keyword, sortType, page).also {
-            eventPublisher.publishEvent(BlogSearchedEvent(keyword))
+    override fun search(spec: BlogSearchSpec): BlogSearcherDto {
+        return blogSearcher.search(spec.keyword, spec.sortType, spec.page).also {
+            eventPublisher.publishEvent(BlogSearchedEvent(spec.keyword))
         }
     }
 }

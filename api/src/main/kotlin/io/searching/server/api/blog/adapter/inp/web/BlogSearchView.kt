@@ -1,5 +1,6 @@
 package io.searching.server.api.blog.adapter.inp.web
 
+import io.searching.server.api.blog.service.BlogSearchSpec
 import io.searching.server.integration.blog.BlogSearcherDto
 import io.searching.server.integration.blog.SortType
 import jakarta.validation.constraints.NotBlank
@@ -14,7 +15,11 @@ data class BlogSearchReq(
 
     @field:Range(min = 1, max = 50)
     val page: Int = 1
-)
+) {
+    fun toSpec(): BlogSearchSpec {
+        return BlogSearchSpec(keyword.trim(), sort, page)
+    }
+}
 
 class BlogSearchRes(
     val page: Int,

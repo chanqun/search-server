@@ -40,7 +40,7 @@ internal class BlogAppServiceTest @Autowired constructor(
             )
         )
 
-        blogAppService.search("keyword", SortType.ACCURACY, page = 1)
+        blogAppService.search(BlogSearchSpec("keyword", SortType.ACCURACY, page = 1))
 
         assertThat(applicationEvents.stream(BlogSearchedEvent::class.java).toList().first().keyword).isEqualTo("keyword")
         verify(exactly = 1) { blogSearcher.search("keyword", any(), any()) }

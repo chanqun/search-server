@@ -3,10 +3,11 @@ package io.searching.server.api.advice
 import io.searching.server.core.support.exception.CustomSearchingException
 import mu.KotlinLogging
 import org.springframework.context.ApplicationEventPublisher
-import org.springframework.http.ResponseEntity
+import org.springframework.http.HttpStatus
 import org.springframework.validation.BindException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 private val logger = KotlinLogging.logger {}
@@ -16,30 +17,34 @@ class ApiControllerAdvice(
     private val eventPublisher: ApplicationEventPublisher
 ) {
     @ExceptionHandler(Exception::class)
-    fun exception(e: Exception): ResponseEntity<ErrorRes> {
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun exception(e: Exception): ErrorRes {
         logger.error(e) { e.message }
 
         eventPublisher.publishEvent(UnhandledExceptionEvent(e))
 
-        return ResponseEntity.internalServerError().body(ErrorRes(UNKNOWN_ERROR_MESSAGE))
+        return ErrorRes(UNKNOWN_ERROR_MESSAGE)
     }
 
     @ExceptionHandler(CustomSearchingException::class)
-    fun customSearchingException(e: CustomSearchingException): ResponseEntity<ErrorRes> {
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun customSearchingException(e: CustomSearchingException): ErrorRes {
         logger.error(e) { "CustomSearchingException: ${e.error}" }
 
-        return ResponseEntity.internalServerError().body(ErrorRes(e.error))
+        return ErrorRes(e.error)
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun methodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorRes> {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun methodArgumentNotValidException(e: MethodArgumentNotValidException): ErrorRes {
         logger.trace(e) { "MethodArgumentNotValidException > ${e.message}" }
 
-        return ResponseEntity.badRequest().body(ErrorRes(DEFAULT_REQUEST_ERROR_MESSAGE))
+        return ErrorRes(DEFAULT_REQUEST_ERROR_MESSAGE)
     }
 
     @ExceptionHandler(BindException::class)
-    fun bindException(e: BindException): ResponseEntity<ErrorRes> {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun bindException(e: BindException): ErrorRes {
         logger.trace(e) { "BindException > ${e.message}" }
 
         val fieldErrors = e.bindingResult.fieldErrors
@@ -52,7 +57,7 @@ class ApiControllerAdvice(
             }
         }
 
-        return ResponseEntity.badRequest().body(ErrorRes(errors))
+        return ErrorRes(errors)
     }
 
     companion object {
