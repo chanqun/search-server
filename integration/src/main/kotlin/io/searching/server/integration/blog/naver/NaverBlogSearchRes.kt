@@ -10,10 +10,7 @@ class NaverBlogSearchRes(
     val display: Int,
     val total: Int,
     val items: List<NaverBlogDocument> = emptyList()
-) {
-    val isEnd: Boolean
-        get() = start > total
-}
+)
 
 class NaverBlogDocument(
     val title: String,

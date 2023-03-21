@@ -24,7 +24,12 @@ class KakaoBlogSearcher(
                     size = PAGE_DISPLAY_CONTENTS_COUNT, authorization = "KakaoAK ${blogProperties.kakaoRestApiKey}"
                 )
 
-            BlogSearcherDto(page, res.meta.isEnd, res.documents.map { it.toDocument() })
+            BlogSearcherDto(
+                page = page, sortType,
+                displayCount = PAGE_DISPLAY_CONTENTS_COUNT,
+                totalCount = res.meta.pageableCount,
+                res.documents.map { it.toDocument() }
+            )
         }.onFailure {
             logger.error(it) { "KakaoBlogSearcher ${it.message}" }
 

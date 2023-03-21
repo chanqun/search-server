@@ -22,23 +22,35 @@ data class BlogSearchReq(
 }
 
 class BlogSearchRes(
-    val page: Int,
-    val isEnd: Boolean,
+    val pageInfo: BlogSearchPageInfo,
     val documents: List<BlogDocumentData>
 ) {
     companion object {
         fun of(blogSearcherDto: BlogSearcherDto): BlogSearchRes {
             return with(blogSearcherDto) {
-                BlogSearchRes(page, isEnd, documents.map {
-                    BlogDocumentData(
-                        title = it.title, contents = it.contents, url = it.url,
-                        blogName = it.blogName, thumbnail = it.thumbnail, datetime = it.datetime
-                    )
-                })
+                BlogSearchRes(
+                    BlogSearchPageInfo(
+                        page = page, sort = sort,
+                        displayCount = displayCount, totalCount = totalCount, isEnd
+                    ),
+                    documents.map {
+                        BlogDocumentData(
+                            title = it.title, contents = it.contents, url = it.url,
+                            blogName = it.blogName, thumbnail = it.thumbnail, datetime = it.datetime
+                        )
+                    })
             }
         }
     }
 }
+
+class BlogSearchPageInfo(
+    val page: Int,
+    val sort: SortType,
+    val displayCount: Int,
+    val totalCount: Int,
+    val isEnd: Boolean,
+)
 
 class BlogDocumentData(
     val title: String,

@@ -21,11 +21,15 @@ class NaverBlogSearcher(
             val res: NaverBlogSearchRes =
                 naverBlogClient.search(
                     keyword = keyword, sort = convertSortTypeToString(sortType),
-                    start = calcItemsStart(page), size = PAGE_DISPLAY_CONTENTS_COUNT,
+                    start = calcStartCount(page), size = PAGE_DISPLAY_CONTENTS_COUNT,
                     clientId = blogProperties.naverClientId, clientSecret = blogProperties.naverClientSecret
                 )
 
-            BlogSearcherDto(page, res.isEnd, res.items.map { it.toDocument() })
+            BlogSearcherDto(
+                page = page, sort = sortType,
+                displayCount = res.display, totalCount = res.total,
+                res.items.map { it.toDocument() }
+            )
         }.onFailure {
             logger.error(it) { "NaverBlogSearcher ${it.message}" }
 
@@ -33,7 +37,7 @@ class NaverBlogSearcher(
         }.getOrNull()
     }
 
-    private fun calcItemsStart(page: Int) = (page * PAGE_DISPLAY_CONTENTS_COUNT) + 1
+    private fun calcStartCount(page: Int) = (page * PAGE_DISPLAY_CONTENTS_COUNT) + 1
 
     private fun convertSortTypeToString(sortType: SortType): String {
         return when (sortType) {

@@ -32,7 +32,7 @@ internal class BlogAppServiceTest @Autowired constructor(
     @Test
     fun `블로그 검색시 블로그 검색 이벤트 발생`() {
         every { blogSearcher.search("keyword", any(), any()) } returns BlogSearcherDto(
-            0, true, listOf(
+            0, SortType.ACCURACY, 0, 1, listOf(
                 Document(
                     title = "title", contents = "contents", url = "url", blogName = "blogName", thumbnail = "thumbnail",
                     OffsetDateTime.now()
@@ -42,7 +42,9 @@ internal class BlogAppServiceTest @Autowired constructor(
 
         blogAppService.search(BlogSearchSpec("keyword", SortType.ACCURACY, page = 1))
 
-        assertThat(applicationEvents.stream(BlogSearchedEvent::class.java).toList().first().keyword).isEqualTo("keyword")
+        assertThat(
+            applicationEvents.stream(BlogSearchedEvent::class.java).toList().first().keyword
+        ).isEqualTo("keyword")
         verify(exactly = 1) { blogSearcher.search("keyword", any(), any()) }
     }
 }
