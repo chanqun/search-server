@@ -36,7 +36,7 @@ class BlogSearchRes(
                     documents.map {
                         BlogDocumentData(
                             title = it.title, contents = it.contents, url = it.url,
-                            blogName = it.blogName, thumbnail = it.thumbnail, datetime = it.datetime
+                            blogName = it.blogName, thumbnail = it.thumbnail, postedAt = it.datetime
                         )
                     })
             }
@@ -58,5 +58,5 @@ class BlogDocumentData(
     val url: String,
     val blogName: String,
     val thumbnail: String,
-    val datetime: OffsetDateTime
+    val postedAt: OffsetDateTime
 )
