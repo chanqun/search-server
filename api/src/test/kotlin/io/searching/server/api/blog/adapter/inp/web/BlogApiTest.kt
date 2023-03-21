@@ -54,7 +54,7 @@ internal class BlogApiTest {
                 jsonPath("$.documents[0].url").value("url"),
                 jsonPath("$.documents[0].blogName").value("blogName"),
                 jsonPath("$.documents[0].thumbnail").value("thumbnail"),
-                jsonPath("$.documents[0].datetime").isNotEmpty
+                jsonPath("$.documents[0].postedAt").isNotEmpty
             )
 
         verify(exactly = 1) { blogSearcher.search("keyword", any(), any()) }
