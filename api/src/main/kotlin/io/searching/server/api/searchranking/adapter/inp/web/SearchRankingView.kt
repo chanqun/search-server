@@ -1,14 +1,12 @@
 package io.searching.server.api.searchranking.adapter.inp.web
 
-import io.searching.server.core.searchranking.domain.SearchRanking
-
 class SearchRankingRes(
     val searchRankings: List<SearchRankingData>
 ) {
     companion object {
-        fun of(searchRankings: List<SearchRanking>): SearchRankingRes {
+        fun of(searchRankings: List<Pair<String, Int>>): SearchRankingRes {
             return SearchRankingRes(searchRankings.mapIndexed { index, searchRanking ->
-                SearchRankingData(ranking = index + 1, keyword = searchRanking.keyword, count = searchRanking.count)
+                SearchRankingData(ranking = index + 1, keyword = searchRanking.first, count = searchRanking.second)
             })
         }
     }

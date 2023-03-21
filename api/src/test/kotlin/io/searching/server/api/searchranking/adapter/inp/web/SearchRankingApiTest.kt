@@ -1,7 +1,6 @@
 package io.searching.server.api.searchranking.adapter.inp.web
 
-import io.searching.server.core.searchranking.application.port.outp.SearchRankingRepository
-import io.searching.server.core.searchranking.domain.SearchRanking
+import io.searching.server.api.searchranking.adapter.inp.event.KeywordCounter
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 @AutoConfigureMockMvc
 internal class SearchRankingApiTest @Autowired constructor(
-    private val searchRankingRepository: SearchRankingRepository
+    private val keywordCounter: KeywordCounter
 ) {
     @Autowired
     lateinit var mockMvc: MockMvc
@@ -23,7 +22,7 @@ internal class SearchRankingApiTest @Autowired constructor(
     @Test
     fun `검색어 랭킹 조회`() {
         (1..2).forEach {
-            searchRankingRepository.save(SearchRanking("keyword$it", it))
+            keywordCounter.increase("keyword$it", it)
         }
 
         mockMvc.perform(get("/search-ranking"))
