@@ -17,20 +17,18 @@ class KakaoBlogSearcher(
     private val eventPublisher: ApplicationEventPublisher
 ) : BlogSearchVendor {
     override fun search(keyword: String, sortType: SortType, page: Int): BlogSearcherDto? {
-        return try {
+        return runCatching {
             val res: KakaoBlogSearchRes =
                 kakaoBlogClient.search(
                     keyword, sortType, page,
                     size = PAGE_DISPLAY_CONTENTS_COUNT, authorization = "KakaoAK ${blogProperties.kakaoRestApiKey}"
                 )
 
-            BlogSearcherDto(page, res.meta.is_end, res.documents.map { it.toDocument() })
-        } catch (e: Exception) {
-            logger.error(e) { "KakaoBlogSearcher ${e.message}" }
+            BlogSearcherDto(page, res.meta.isEnd, res.documents.map { it.toDocument() })
+        }.onFailure {
+            logger.error(it) { "KakaoBlogSearcher ${it.message}" }
 
             eventPublisher.publishEvent(BlogSearchingFailedEvent())
-
-            null
-        }
+        }.getOrNull()
     }
 }

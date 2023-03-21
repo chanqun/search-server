@@ -1,5 +1,6 @@
 package io.searching.server.integration.blog.kakao
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import io.searching.server.integration.blog.Document
 import java.time.OffsetDateTime
 
@@ -9,9 +10,12 @@ class KakaoBlogSearchRes(
 )
 
 class KakaoBlogMeta(
-    val total_count: Int,
-    val pageable_count: Int,
-    val is_end: Boolean,
+    @JsonProperty("total_count")
+    val totalCount: Int,
+    @JsonProperty("pageable_count")
+    val pageableCount: Int,
+    @JsonProperty("isEnd")
+    val isEnd: Boolean,
 )
 
 class KakaoBlogDocument(

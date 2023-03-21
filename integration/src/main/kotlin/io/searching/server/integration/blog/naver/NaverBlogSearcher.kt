@@ -17,7 +17,7 @@ class NaverBlogSearcher(
     private val eventPublisher: ApplicationEventPublisher
 ) : BlogSearchVendor {
     override fun search(keyword: String, sortType: SortType, page: Int): BlogSearcherDto? {
-        return try {
+        return runCatching {
             val res: NaverBlogSearchRes =
                 naverBlogClient.search(
                     keyword = keyword, sort = convertSortTypeToString(sortType),
@@ -26,13 +26,11 @@ class NaverBlogSearcher(
                 )
 
             BlogSearcherDto(page, res.isEnd, res.items.map { it.toDocument() })
-        } catch (e: Exception) {
-            logger.error(e) { "NaverBlogSearcher ${e.message}" }
+        }.onFailure {
+            logger.error(it) { "NaverBlogSearcher ${it.message}" }
 
             eventPublisher.publishEvent(BlogSearchingFailedEvent())
-
-            null
-        }
+        }.getOrNull()
     }
 
     private fun calcItemsStart(page: Int) = (page * PAGE_DISPLAY_CONTENTS_COUNT) + 1

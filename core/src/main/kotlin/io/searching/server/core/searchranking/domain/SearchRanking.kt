@@ -23,11 +23,7 @@ class SearchRanking(
     var count: Int = 0,
 
     /** 생성일시 */
-    val createdAt: OffsetDateTime = OffsetDateTime.now(),
-
-    @Version
-    val version: Long = 0
-
+    val createdAt: OffsetDateTime = OffsetDateTime.now()
 ) : BaseAggregateRoot<SearchRanking>() {
     fun record(count: Int): SearchRanking {
         require(count >= 0)
