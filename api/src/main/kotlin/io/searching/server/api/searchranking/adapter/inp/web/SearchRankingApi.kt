@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController
 private val logger = KotlinLogging.logger { }
 
 @RestController
-@RequestMapping("/search-ranking")
+@RequestMapping("/search-rankings")
 class SearchRankingApi(
     private val searchRankingAppService: SearchRankingAppService
 ) {
 
     @GetMapping
     fun getSearchRanking(): SearchRankingRes {
-        logger.info { "[GET] /search-ranking" }
+        logger.info { "[GET] /search-rankings" }
 
         val searchRankings = searchRankingAppService.getTopTen()
 

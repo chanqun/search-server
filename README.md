@@ -40,7 +40,7 @@ documents
 ### 2. 인기 검색어 목록
 사용자들이 많이 검색한 순서대로, 최대 10개의 검색 키워드를 제공
 ```shell
-GET /search-ranking
+GET /search-rankings
 ```
 
 #### Response

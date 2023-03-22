@@ -27,7 +27,7 @@ internal class SearchRankingApiTest @Autowired constructor(
             keywordCounter.increase("keyword$it", it)
         }
 
-        mockMvc.perform(get("/search-ranking"))
+        mockMvc.perform(get("/search-rankings"))
             .andExpectAll(
                 status().isOk,
                 jsonPath("$.searchRankings[0].keyword").value("keyword2"),
