@@ -11,7 +11,7 @@ Parameter
 
 | Name | Type | Description | Required |
 | --- | --- | --- | --- |
-| keyword | String | 검색을 원하는 질의어 | O |
+| keyword | String | 검색을 원하는 질의어 (특수문자는 검색어에서 제외 됨) | O |
 | sort | String | 결과 문서 정렬 방식, accuracy(정확도순) 또는 recency(최신순), 기본 값 accuracy | X |
 | page | Integer | 결과 페이지 번호, 1~50 사이의 값, 기본 값 1 | X |
 
