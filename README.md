@@ -1,3 +1,9 @@
+## jar 다운로드 링크
+```shell
+java -jar searching-api.jar
+```
+[다운로드링크](https://drive.google.com/file/d/1_ohyuLtsb7VvTU87No6DAdBf0EuspaJs/view?usp=sharing)
+
 ## API 명세
 
 ### 1. 블로그 검색
