@@ -1,7 +1,7 @@
 package io.searching.server.core.searchranking.domain
 
 import io.searching.server.core.support.jpa.BaseAggregateRoot
-import jakarta.persistence.*
+import javax.persistence.*
 import java.time.OffsetDateTime
 
 /**

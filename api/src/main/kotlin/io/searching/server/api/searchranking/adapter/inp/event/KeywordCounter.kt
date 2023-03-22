@@ -1,7 +1,7 @@
 package io.searching.server.api.searchranking.adapter.inp.event
 
 import io.searching.server.core.searchranking.application.port.outp.SearchRankingRepository
-import jakarta.annotation.PostConstruct
+import javax.annotation.PostConstruct
 import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger

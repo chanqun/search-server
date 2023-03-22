@@ -3,7 +3,7 @@ package io.searching.server.api.blog.adapter.inp.web
 import io.searching.server.api.blog.service.BlogSearchSpec
 import io.searching.server.integration.blog.BlogSearcherDto
 import io.searching.server.integration.blog.SortType
-import jakarta.validation.constraints.NotBlank
+import javax.validation.constraints.NotBlank
 import org.hibernate.validator.constraints.Range
 import java.time.OffsetDateTime
 

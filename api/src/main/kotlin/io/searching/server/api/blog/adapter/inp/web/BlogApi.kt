@@ -1,7 +1,7 @@
 package io.searching.server.api.blog.adapter.inp.web
 
 import io.searching.server.api.blog.service.BlogAppService
-import jakarta.validation.Valid
+import javax.validation.Valid
 import mu.KotlinLogging
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
