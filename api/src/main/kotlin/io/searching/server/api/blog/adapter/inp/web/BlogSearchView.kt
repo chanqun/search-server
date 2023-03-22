@@ -21,7 +21,7 @@ data class BlogSearchReq(
     }
 
     private fun convertKeywordToSpec(keyword: String): String {
-        return keyword.filter { it.isLetterOrDigit() }.trim()
+        return keyword.filter { it.isLetterOrDigit() || it.isWhitespace() }.trim()
     }
 }
 
