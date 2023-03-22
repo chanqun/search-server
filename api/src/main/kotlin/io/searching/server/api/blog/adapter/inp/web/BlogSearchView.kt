@@ -17,7 +17,11 @@ data class BlogSearchReq(
     val page: Int = 1
 ) {
     fun toSpec(): BlogSearchSpec {
-        return BlogSearchSpec(keyword.trim(), sort, page)
+        return BlogSearchSpec(convertKeywordToSpec(keyword), sort, page)
+    }
+
+    private fun convertKeywordToSpec(keyword: String): String {
+        return keyword.filter { it.isLetterOrDigit() }.trim()
     }
 }
 

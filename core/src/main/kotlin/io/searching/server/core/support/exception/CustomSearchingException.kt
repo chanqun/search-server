@@ -6,5 +6,6 @@ class CustomSearchingException(val error: SearchingError = UNKNOWN) : RuntimeExc
 
 enum class SearchingError {
     UNKNOWN,
-    SEARCHING_SERVICE_ERROR
+    SEARCHING_SERVICE_ERROR,
+    CHECK_YOUR_KEYWORD
 }
