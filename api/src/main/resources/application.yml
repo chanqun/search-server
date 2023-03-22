@@ -4,14 +4,14 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:~/test
-    username: ${db.username:sa}
-    password: ${db.password:1234}
+    username: sa
+    password: 1234
     hikari:
       maximum-pool-size: 2
       minimum-idle: 1
   jpa:
     hibernate:
-      ddl-auto: ${db.ddl:create-drop}
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
@@ -20,3 +20,6 @@ spring:
           validation:
             mode: none
     show-sql: false
+server:
+  tomcat:
+    relaxed-query-chars: <,>,[,\,],^,`,{,|,}

@@ -9,7 +9,7 @@ import java.time.OffsetDateTime
 
 data class BlogSearchReq(
     @field:NotBlank
-    val keyword: String,
+    val keyword: String = "",
 
     val sort: SortType = SortType.ACCURACY,
 
