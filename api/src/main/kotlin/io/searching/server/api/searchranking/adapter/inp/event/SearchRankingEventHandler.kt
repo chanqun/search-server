@@ -1,6 +1,7 @@
 package io.searching.server.api.searchranking.adapter.inp.event
 
 import io.searching.server.api.blog.service.BlogSearchedEvent
+import io.searching.server.api.searchranking.adapter.inp.service.KeywordCounter
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Propagation

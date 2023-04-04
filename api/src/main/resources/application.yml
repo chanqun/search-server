@@ -20,6 +20,8 @@ spring:
           validation:
             mode: none
     show-sql: false
+  redis:
+    port: 6739
 server:
   tomcat:
     relaxed-query-chars: <,>,[,\,],^,`,{,|,}

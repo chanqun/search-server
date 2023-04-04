@@ -1,6 +1,6 @@
 package io.searching.server.api.searchranking.adapter.inp.web
 
-import io.searching.server.api.searchranking.adapter.inp.event.KeywordCounter
+import io.searching.server.api.searchranking.adapter.inp.service.KeywordCounter
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

@@ -1,6 +1,5 @@
 package io.searching.server.api.searchranking.adapter.inp.service
 
-import io.searching.server.api.searchranking.adapter.inp.event.KeywordCounter
 import io.searching.server.core.searchranking.application.port.outp.SearchRankingRepository
 import io.searching.server.core.searchranking.domain.SearchRanking
 import org.assertj.core.api.Assertions.assertThat

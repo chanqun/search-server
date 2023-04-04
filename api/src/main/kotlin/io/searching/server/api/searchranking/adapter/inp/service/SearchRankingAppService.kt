@@ -1,6 +1,5 @@
 package io.searching.server.api.searchranking.adapter.inp.service
 
-import io.searching.server.api.searchranking.adapter.inp.event.KeywordCounter
 import io.searching.server.core.searchranking.application.port.inp.RecordSearchRanking
 import io.searching.server.core.searchranking.application.port.inp.RecordSearchRankingCommand
 import org.springframework.stereotype.Service

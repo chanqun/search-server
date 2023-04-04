@@ -1,4 +1,4 @@
-package io.searching.server.api.searchranking.adapter.inp.event
+package io.searching.server.api.searchranking.adapter.inp.service
 
 import io.searching.server.core.searchranking.application.port.outp.SearchRankingRepository
 import io.searching.server.core.searchranking.domain.SearchRanking
